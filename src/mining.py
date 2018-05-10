@@ -5,9 +5,10 @@ from tweepy import Stream
 import time
 import sys
 import csv
+import json
 
 from twitter_config import get_auth_api
-
+import mongodb_config as mdb
 
 
 # def fix_text(text):
@@ -40,6 +41,9 @@ class StdOutListener(StreamListener):
 		# That sets the api
 		self.api = api
 		
+		self.connect_db = mdb.connect()
+		self.db = mdb.create_db(self.connect_db,'Tweets_100DaysofCode')
+
 		# Create a file with 'data_' and the current time
 		# self.filename = 'data'+'_'+time.strftime('%Y%m%d-%H%M%S')+'.jsonl'
 		
@@ -85,9 +89,15 @@ class StdOutListener(StreamListener):
 
 	def on_data(self, data):
 		try:
-			with open('../data/python.json', 'a') as f:
-				f.write(data)
-				return True
+			#with open('../data/python.json', 'a') as f:
+			#	f.write(data)
+			data_json = json.loads(data)
+			#print(data)
+			print(data_json['created_at'])
+			collection_name = 'tweets'+'_'+time.strftime('%Y%m%d')
+			collection = mdb.create_collection(self.db, collection_name)
+			print(mdb.insert_data(collection, data_json))
+			return True
 		except BaseException as e:
 			print("Error on_data: %s" % str(e))
 		return True

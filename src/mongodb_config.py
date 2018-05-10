@@ -85,12 +85,17 @@ if __name__ == "__main__":
 
 	data_json = json.loads('{"test":123}')
 	doc = {"name": "Alberto", "surname": "Negron", "twitter": "@Altons"}
-	objID = insert_data(coll_test, doc)
+	objID = insert_data(coll_test, data_json)
 	print(objID)
 
 	all_data = db_test.coll_test.find()
 	for data in all_data:
 		print(data)
+
+
+	print('Current databases active: ', connect.database_names())
+	print('Current collections active: ', db_test.collection_names())
+
 	#mongodb_uri = get_mongodb_uri()
 
 	#client = pymongo.MongoClient("mongodb+srv://" + urllib.parse.quote(mongodb_uri['username']) + ":" + urllib.parse.quote(mongodb_uri['password']) + "@" + urllib.parse.quote(mongodb_uri['cluster']) + ".mongodb.net/test")
