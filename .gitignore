@@ -102,3 +102,4 @@ ENV/
 
 # Eric
 config.txt
+*mongodb.txt
