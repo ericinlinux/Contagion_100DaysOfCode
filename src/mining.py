@@ -10,13 +10,13 @@ from twitter_config import get_auth_api
 
 
 
-def fix_text(text):
-	'''
-	To correct the problem with: 'ascii' codec can't encode character
-	'''
-	return u''.text.encode('utf-8').strip()
+# def fix_text(text):
+# 	'''
+# 	To correct the problem with: 'ascii' codec can't encode character
+# 	'''
+# 	return u''.text.encode('utf-8').strip()
 
-def get_queries(queries_f='queries.txt'):
+def get_queries(queries_f='../settings/queries.txt'):
 	'''
 	Read the file with the keys for Twitter API and return a dictionary with them.
 	'''
@@ -85,7 +85,7 @@ class StdOutListener(StreamListener):
 
 	def on_data(self, data):
 		try:
-			with open('python.json', 'a') as f:
+			with open('../data/python.json', 'a') as f:
 				f.write(data)
 				return True
 		except BaseException as e:

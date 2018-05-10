@@ -8,7 +8,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 
-def get_api_keys(config_f='config.txt'):
+def get_api_keys(config_f='../settings/config.txt'):
 	'''
 	Read the file with the keys for Twitter API and return a dictionary with them.
 	'''
