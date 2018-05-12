@@ -15,5 +15,5 @@ collnames = db.collection_names()
 for coll in collnames:
 	coll_data = list(db[coll].find())
 	print('Collection {0} contains {1} tweets saved.'.format(coll,len(list(coll_data))))
-	for data in coll_data:
-		print(data['created_at'])
+	# for data in coll_data:
+	# 	print(data['created_at'])
