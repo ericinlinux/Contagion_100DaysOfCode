@@ -27,22 +27,28 @@ def get_mongodb_uri(config_f='../settings/mongodb.txt'):
 			'cluster':cluster
 			}
 
-def connect():
-	# Connection to Mongo DB
-	mongodb_uri = get_mongodb_uri()
-	try:
-		#conn = pymongo.MongoClient("mongodb://" + urllib.parse.quote(mongodb_uri['username']) + ":" + urllib.parse.quote(mongodb_uri['password']) + "@" + urllib.parse.quote(mongodb_uri['cluster']) + ".mongodb.net/test")
+def connect(local=False):
+	if not local:
+		# Connection to Mongo DB
+		mongodb_uri = get_mongodb_uri()
+		try:
+			#conn = pymongo.MongoClient("mongodb://" + urllib.parse.quote(mongodb_uri['username']) + ":" + urllib.parse.quote(mongodb_uri['password']) + "@" + urllib.parse.quote(mongodb_uri['cluster']) + ".mongodb.net/test")
 
-		# mongodb+srv://<USERNAME>:<PASSWORD>@contagion100daysofcode-igtzu.mongodb.net/test?retryWrites=true
-		atlas_uri = "mongodb+srv://" + urllib.parse.quote(mongodb_uri['username']) + ":" + urllib.parse.quote(mongodb_uri['password']) + "@" + urllib.parse.quote(mongodb_uri['cluster']) + ".mongodb.net/test?retryWrites=true"
-		
-		conn = pymongo.MongoClient(atlas_uri)
-
-		
-		print("Mongodb connected successfully!!!")
-	except pymongo.errors.ConnectionFailure as e:
-	   print("Could not connect to MongoDB: %s", e)
-
+			# mongodb+srv://<USERNAME>:<PASSWORD>@contagion100daysofcode-igtzu.mongodb.net/test?retryWrites=true
+			atlas_uri = "mongodb+srv://" + urllib.parse.quote(mongodb_uri['username']) + ":" + urllib.parse.quote(mongodb_uri['password']) + "@" + urllib.parse.quote(mongodb_uri['cluster']) + ".mongodb.net/test?retryWrites=true"
+			
+			conn = pymongo.MongoClient(atlas_uri)
+			
+			print("Mongodb connected successfully!!!")
+		except pymongo.errors.ConnectionFailure as e:
+		   print("Could not connect to MongoDB: %s", e)
+	else:
+		try:
+			conn = pymongo.MongoClient('localhost:27017')
+			print("Mongodb connected successfully!!!")
+			
+		except pymongo.errors.ConnectionFailure as e:
+		   print("Could not connect to MongoDB: %s", e)
 	return conn
 
 
