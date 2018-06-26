@@ -7,9 +7,6 @@ click==6.7
 decorator==4.3.0
 dnspython==1.15.0
 entrypoints==0.2.3
-Flask==1.0.2
-flask-mongoengine==0.9.5
-Flask-WTF==0.14.2
 html5lib==1.0.1
 idna==2.6
 ipykernel==4.8.2
@@ -39,7 +36,6 @@ pprint==0.1
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 Pygments==2.2.0
-pykerberos==1.2.1
 pymongo==3.6.1
 PySocks==1.6.8
 python-dateutil==2.7.2
