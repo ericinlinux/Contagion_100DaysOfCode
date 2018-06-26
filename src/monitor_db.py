@@ -4,7 +4,7 @@ import mongodb_config as mdb
 This file verifies the collections and print the timestamps of the tweets found in the DB
 '''
 
-connect = mdb.connect()
+connect = mdb.connect(local=True)
 db = mdb.create_db(connect,'Tweets_100DaysofCode')
 
 print('Current databases active: ', connect.database_names())

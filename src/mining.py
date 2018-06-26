@@ -41,7 +41,7 @@ class StdOutListener(StreamListener):
 		# That sets the api
 		self.api = api
 		
-		self.connect_db = mdb.connect()
+		self.connect_db = mdb.connect(local=True)
 		self.db = mdb.create_db(self.connect_db,'Tweets_100DaysofCode')
 
 		# Create a file with 'data_' and the current time

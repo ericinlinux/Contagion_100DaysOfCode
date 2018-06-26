@@ -57,7 +57,7 @@ def connect(local=False):
         try:
             # MongoClient('mongodb://%s:%s@127.0.0.1' % (username, password))
             mongodb_dict = get_mongodb_local_url()
-            mongodb_url_str = 'mongodb://%s:%s@127.0.0.1'.format(mongodb_dict['user'], mongodb_dict['pwd'])
+            mongodb_url_str = 'mongodb://{0}:{1}@127.0.0.1'.format(mongodb_dict['user'], mongodb_dict['pwd'])
             conn = pymongo.MongoClient(mongodb_url_str)
             print("Mongodb locally connected successfully!!!")
             print(conn)
