@@ -12,10 +12,10 @@ import mongodb_config as mdb
 
 
 # def fix_text(text):
-# 	'''
-# 	To correct the problem with: 'ascii' codec can't encode character
-# 	'''
-# 	return u''.text.encode('utf-8').strip()
+#   '''
+#   To correct the problem with: 'ascii' codec can't encode character
+#   '''
+#   return u''.text.encode('utf-8').strip()
 
 def get_queries(queries_f='../settings/queries.txt'):
 	'''
@@ -90,7 +90,7 @@ class StdOutListener(StreamListener):
 	def on_data(self, data):
 		try:
 			#with open('../data/python.json', 'a') as f:
-			#	f.write(data)
+			#   f.write(data)
 			data_json = json.loads(data)
 			#print(data)
 			print(data_json['created_at'])
@@ -105,63 +105,63 @@ class StdOutListener(StreamListener):
 	# # When a tweet appears
 	# def on_status(self, status):
 		
-	# 	# Open the csv file created previously
-	# 	csvFile = open(self.filename, 'a')
+	#   # Open the csv file created previously
+	#   csvFile = open(self.filename, 'a')
 		
-	# 	# Create a csv writer
-	# 	csvWriter = csv.writer(csvFile)
+	#   # Create a csv writer
+	#   csvWriter = csv.writer(csvFile)
 		
-	# 	# If the tweet is not a retweet
-	# 	if not 'RT @' in status.text:
-	# 		# Try to 
-	# 		try:
-	# 			# Write the tweet's information to the csv file
-	# 			csvWriter.writerow([clean_text(status.text),
-	# 								status.created_at,
-	# 								status.geo,
-	# 								status.lang,
-	# 								status.place,
-	# 								status.coordinates,
-	# 								status.user.favourites_count,
-	# 								status.user.statuses_count,
-	# 								status.user.description,
-	# 								status.user.location,
-	# 								status.user.id,
-	# 								status.user.created_at,
-	# 								status.user.verified,
-	# 								status.user.following,
-	# 								status.user.url,
-	# 								status.user.listed_count,
-	# 								status.user.followers_count,
-	# 								status.user.default_profile_image,
-	# 								status.user.utc_offset,
-	# 								status.user.friends_count,
-	# 								status.user.default_profile,
-	# 								status.user.name,
-	# 								status.user.lang,
-	# 								status.user.screen_name,
-	# 								status.user.geo_enabled,
-	# 								status.user.profile_background_color,
-	# 								status.user.profile_image_url,
-	# 								status.user.time_zone,
-	# 								status.id,
-	# 								status.favorite_count,
-	# 								status.retweeted,
-	# 								status.source,
-	# 								status.favorited,
-	# 								status.retweet_count])
-	# 		# If some error occurs
-	# 		except Exception as e:
-	# 			# Print the error
-	# 			print(e)
-	# 			# and continue
-	# 			pass
+	#   # If the tweet is not a retweet
+	#   if not 'RT @' in status.text:
+	#       # Try to 
+	#       try:
+	#           # Write the tweet's information to the csv file
+	#           csvWriter.writerow([clean_text(status.text),
+	#                               status.created_at,
+	#                               status.geo,
+	#                               status.lang,
+	#                               status.place,
+	#                               status.coordinates,
+	#                               status.user.favourites_count,
+	#                               status.user.statuses_count,
+	#                               status.user.description,
+	#                               status.user.location,
+	#                               status.user.id,
+	#                               status.user.created_at,
+	#                               status.user.verified,
+	#                               status.user.following,
+	#                               status.user.url,
+	#                               status.user.listed_count,
+	#                               status.user.followers_count,
+	#                               status.user.default_profile_image,
+	#                               status.user.utc_offset,
+	#                               status.user.friends_count,
+	#                               status.user.default_profile,
+	#                               status.user.name,
+	#                               status.user.lang,
+	#                               status.user.screen_name,
+	#                               status.user.geo_enabled,
+	#                               status.user.profile_background_color,
+	#                               status.user.profile_image_url,
+	#                               status.user.time_zone,
+	#                               status.id,
+	#                               status.favorite_count,
+	#                               status.retweeted,
+	#                               status.source,
+	#                               status.favorited,
+	#                               status.retweet_count])
+	#       # If some error occurs
+	#       except Exception as e:
+	#           # Print the error
+	#           print(e)
+	#           # and continue
+	#           pass
 			
-	# 	# Close the csv file
-	# 	csvFile.close()
+	#   # Close the csv file
+	#   csvFile.close()
 
-	# 	# Return nothing
-	# 	return
+	#   # Return nothing
+	#   return
 
 	# When an error occurs
 	def on_error(self, status_code):
@@ -217,12 +217,19 @@ def start_mining(queries=None):
 	
 	auth = get_auth_api()[0]
 	
-	# Create a stream object with listener and authorization
-	stream = Stream(auth, l)
+	while True:
+		try:
+			# Create a stream object with listener and authorization
+			stream = Stream(auth, l)
+			# Run the stream object using the user defined queries
+			stream.filter(track=queries)
 
-	# Run the stream object using the user defined queries
-	stream.filter(track=queries)
-
+		except Exception as e:
+			print("Error occurred on {}",time.strftime('%Y%m%d-%H%M%S'))
+			print("Exception: {}", e)
+			continue
+	
+	
 
 # for test purposes
 if __name__ == "__main__":
