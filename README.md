@@ -11,3 +11,7 @@ To use this project for your own data collection you have to:
 3. (Future) Add your information for the MongoDB access
 
 To get your Twitter API keys go to [Apps Twitter](http://apps.twitter.com), login with your Twitter account and create a new application.
+
+To install MongoDB on Ubuntu 16.04, follow the instructions at the [official website](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/).
+
+To configure MongoDB locally on Ubuntu 16.04, follow the instructions [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-mongodb-on-ubuntu-16-04).
