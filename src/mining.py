@@ -8,7 +8,7 @@ import csv
 import json
 
 from twitter_config import get_auth_api
-import mongodb_config as mdb
+#import mongodb_config as mdb
 
 
 # def fix_text(text):
@@ -39,13 +39,13 @@ class StdOutListener(StreamListener):
 	# Define a function that is initialized when the miner is called
 	def __init__(self, api = None):
 		# That sets the api
-		self.api = api
+		#self.api = api
 		
-		self.connect_db = mdb.connect(local=True)
-		self.db = mdb.create_db(self.connect_db,'Tweets_100DaysofCode')
+		#self.connect_db = mdb.connect(local=True)
+		#self.db = mdb.create_db(self.connect_db,'Tweets_100DaysofCode')
 
 		# Create a file with 'data_' and the current time
-		# self.filename = 'data'+'_'+time.strftime('%Y%m%d-%H%M%S')+'.jsonl'
+		self.filename = 'data'+'_'+time.strftime('%Y%m%d-%H%M%S')+'.jsonl'
 		
 		# Here it should be the MongoDB set up...
 
@@ -89,14 +89,14 @@ class StdOutListener(StreamListener):
 
 	def on_data(self, data):
 		try:
-			#with open('../data/python.json', 'a') as f:
-			#	f.write(data)
-			data_json = json.loads(data)
-			#print(data)
+			with open('../data/python.json', 'a') as f:
+				f.write(data)
+			#data_json = json.loads(data)
+			print(data)
 			print(data_json['created_at'])
-			collection_name = 'tweets'+'_'+time.strftime('%Y%m%d')
-			collection = mdb.create_collection(self.db, collection_name)
-			print(mdb.insert_data(collection, data_json))
+			#collection_name = 'tweets'+'_'+time.strftime('%Y%m%d')
+			#collection = mdb.create_collection(self.db, collection_name)
+			#print(mdb.insert_data(collection, data_json))
 			return True
 		except BaseException as e:
 			print("Error on_data: %s" % str(e))
@@ -221,7 +221,7 @@ def start_mining(queries=None):
 	stream = Stream(auth, l)
 
 	# Run the stream object using the user defined queries
-	stream.filter(track=queries)
+	stream.filter(languages=["pt"], track=queries)
 
 
 # for test purposes
